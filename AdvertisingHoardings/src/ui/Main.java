@@ -4,15 +4,16 @@ import java.util.Scanner;
 import model.InfrastructureDepartment;
 public class Main {
 	public static final int EXIT_OPTION=4;
-	
+
 	private static Scanner sc= new Scanner(System.in);
 	private static InfrastructureDepartment iDeparment= new InfrastructureDepartment() ;
 
 	public static void main(String[] args) throws IOException {
 		iDeparment.importData();
+		System.out.println("			WELCOME TO INFRASTRUCTURE DEPARTMENT");
 		int option=0;
 		while (option==0) {
-			System.out.println(" Welcome to Infrastructure Department, please select an option: \n");
+			System.out.println("Please select an option: \n");
 			System.out.println("1: Add a billboard.");
 			System.out.println("2: Show billboards.");
 			System.out.println("3: Export the danger report.");
@@ -20,7 +21,7 @@ public class Main {
 			option=sc.nextInt();
 			sc.nextLine();
 			switch(option) {
-			
+
 			case 1:
 				option=0;
 				
@@ -34,8 +35,7 @@ public class Main {
 				boolean condition=sc.nextBoolean();
 				System.out.println("what is the brand of the billboard");
 				String brand=sc.next();
-				//String message=width+"++"+height+"++"+condition+"++"+brand;
-				iDeparment.addBillboard(width,height,condition, brand);
+				System.out.println(iDeparment.addBillboard(width,height,condition, brand));
 				break;
 				
 			case 2:
