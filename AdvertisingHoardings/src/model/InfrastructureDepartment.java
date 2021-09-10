@@ -16,7 +16,7 @@ import java.util.List;
 public class InfrastructureDepartment {
 	
 	public static final String BILLBOARD_FILE_NAME="data/billboard.bbd";
-	public static final String IMPORT_DATA="data/BillboardDataExported.txt";
+	public static final String IMPORT_DATA="data/BillboardDataExported.csv";
 	public static final String EXPORT_DATA="data/BillboardDataExported.csv";
 	public static final String REPORT="data/report.txt";
 	public static final String SAVE_DATA="data/Billboards.plaza";
@@ -32,9 +32,9 @@ public class InfrastructureDepartment {
 		if(billboard.add(new Billboard(w, h, iu, b))) {
 			saveBillboard();
 			FileWriter fw= new FileWriter(EXPORT_DATA, true);
-			fw.write(w+"++"+h+"++"+iu+"++"+b+"\n");
+			fw.write(w+"|"+h+"|"+iu+"|"+b+"\n");
 			fw.close();
-			message="";
+			message="The billboard has added successfully.";
 		}
 		return message;
 	}
@@ -88,17 +88,12 @@ public class InfrastructureDepartment {
 		BufferedReader br= new BufferedReader(new FileReader(IMPORT_DATA));
 		String line= br.readLine();
 		while(line!=null) {
-			String[] part= line.split(";");
+			String[] part= line.split("\\|");
 			Billboard register= new Billboard(Double.parseDouble(part[0]),Double.parseDouble(part[1]),Boolean.parseBoolean(part[2]),part[3]);
 			billboard.add(register);
 			line=br.readLine();
 		}
 		br.close();
-	}
-
-	public String toString() {
-		String text="";
-		return text;
 	}
 
 	public List<Billboard> getBillboard() {

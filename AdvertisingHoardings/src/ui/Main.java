@@ -1,5 +1,7 @@
 package ui;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import model.InfrastructureDepartment;
 public class Main {
@@ -10,6 +12,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		iDeparment.importData();
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("			WELCOME TO INFRASTRUCTURE DEPARTMENT");
 		int option=0;
 		while (option==0) {
@@ -24,17 +27,15 @@ public class Main {
 
 			case 1:
 				option=0;
-				
-				System.out.println("Enter the width of the billboard");
-				double width=sc.nextDouble();
-				sc.nextLine();
-				System.out.println("Enter the height of the billboard");
-				double height=sc.nextDouble();
-				sc.nextLine();
-				System.out.println("Is the billboard in us? (true or false)");
-				boolean condition=sc.nextBoolean();
-				System.out.println("what is the brand of the billboard");
-				String brand=sc.next();
+				String answer;
+				String[] properties;
+				System.out.println("Enter the billboard information in the next order: width++height++condition++brand ");
+				answer=br.readLine();
+				properties= answer.split("\\++");
+				double width=Double.parseDouble(properties[0]);
+				double height=Double.parseDouble(properties[1]);
+				boolean condition=Boolean.parseBoolean(properties[2]);
+				String brand=properties[3];
 				System.out.println(iDeparment.addBillboard(width,height,condition, brand));
 				break;
 				
@@ -50,6 +51,7 @@ public class Main {
 				
 			case EXIT_OPTION:
 				System.out.println("You have exit from the program.");
+				br.close();
 				break;
 			}
 		}
